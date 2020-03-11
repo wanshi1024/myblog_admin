@@ -6,14 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * 注册用的验证码类
+ * 登陆用的验证码类
  */
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Captcha {
-    private String code;
-    private String email;
+public class CaptchaImg {
+
+    private String username;
+    private String captchaCode;
     private long createTime;
 }

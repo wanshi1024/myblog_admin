@@ -2,8 +2,10 @@ package com.ws.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ws.admin.entity.Captcha;
+import com.ws.admin.entity.CaptchaImg;
 import com.ws.admin.entity.User;
 import com.ws.admin.mapper.UserMapper;
+import com.ws.admin.util.CaptchaImgUtil;
 import com.ws.admin.util.WanshiUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -72,6 +74,29 @@ public class UserController {
         return map;
     }
 
+    @RequestMapping(value = "/usernameIsExist", method = RequestMethod.POST)
+    public Object usernameIsExist(@RequestParam("username") String username) {
+        System.out.println(username);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        Integer count = userMapper.selectCount(queryWrapper);
+        if (count >= 1) {
+            map.put("code", 0);
+            map.put("message", "用户名已存在");
+        } else {
+            map.put("code", 1);
+            map.put("message", "用户名 不存在,可以注册");
+        }
+        return map;
+    }
+
+    /**
+     * 注册验证码
+     *
+     * @param email
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getCaptcha", method = RequestMethod.POST)
     public Object getCaptcha(@RequestParam("email") String email,
                              HttpServletRequest request) {
@@ -94,4 +119,75 @@ public class UserController {
         return map;
     }
 
+    /**
+     * 登陆验证码图片 base64
+     *
+     * @param username
+     * @return
+     */
+    @RequestMapping(value = "/getCaptchaImg", method = RequestMethod.GET)
+    public Object getCaptchaImg(@RequestParam("username") String username,
+                                HttpServletRequest request) {
+
+        System.out.println(username);
+        HttpSession session = request.getSession();
+        CaptchaImg captchaImg = (CaptchaImg) session.getAttribute(username);
+        if (captchaImg != null) {
+            session.removeAttribute(username);
+        }
+
+        Map<String, String> captchaImgBase64 = CaptchaImgUtil.getCaptchaImgBase64(4);
+        session.setAttribute(username, new CaptchaImg(username, captchaImgBase64.get("captchaCode"), System.currentTimeMillis()));
+        return captchaImgBase64;
+    }
+
+    /**
+     * 登陆
+     *
+     * @param user
+     * @param captcha
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Object login(User user,
+                        @RequestParam("captcha") String captcha,
+                        HttpServletRequest request) {
+
+        if (user.getUsername() == null || user.getPassword() == null || captcha == null) {
+            map.put("code", 0);
+            map.put("message", "登陆错误,请正确填写信息");
+            return map;
+        }
+        HttpSession session = request.getSession();
+        // 判断验证码
+        CaptchaImg captchaImg = (CaptchaImg) session.getAttribute(user.getUsername());
+
+        if (captcha == null || !captchaImg.getCaptchaCode().equals(captcha)) {
+            map.put("code", 0);
+            map.put("message", "验证码错误");
+            return map;
+        }
+        //判断验证码超时
+        if (System.currentTimeMillis() - captchaImg.getCreateTime() > 2 * 60 * 1000) {
+            map.put("code", 0);
+            map.put("message", "验证码超时,请重新获取");
+            return map;
+        }
+        session.removeAttribute(user.getUsername());
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", user.getUsername())
+                .eq("password", user.getPassword());
+        User userResult = userMapper.selectOne(queryWrapper);
+        if (userResult != null) {
+            map.put("code", 1);
+            map.put("message", "用户名密码正确,登陆成功");
+            map.put("userInfo", userResult);
+        } else {
+            map.put("code", 0);
+            map.put("message", "用户名或密码错误,请核对后登陆");
+        }
+
+        return map;
+    }
 }
