@@ -1,13 +1,17 @@
 package com.ws.admin.mail;
 
 import com.ws.admin.util.WanshiUtil;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class Test {
-    public static void main(String[] args) {
-        try {
-            WanshiUtil.sendEmail("2672575663@qq.com","<mark>验证码:123456</mark>");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+
+
+    @org.junit.jupiter.api.Test
+    public void test2() throws Exception {
+        WanshiUtil.sendEmail("2672575663@qq.com","111");
     }
+
+
 }

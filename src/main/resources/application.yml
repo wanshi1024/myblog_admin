@@ -16,12 +16,11 @@ spring:
       min-idle: 5
       max-wait: 60000
 
-
-  #  \u70ED\u90E8\u7F72
+  #热部署
   devtools:
     restart:
-      enabled: true  #\u8BBE\u7F6E\u5F00\u542F\u70ED\u90E8\u7F72
-      additional-paths: src/main/java #\u91CD\u542F\u76EE\u5F55
+      enabled: true
+      additional-paths: src/main/java
       poll-interval: 3000ms
       quiet-period: 2999ms
 

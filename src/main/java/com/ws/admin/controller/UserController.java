@@ -26,6 +26,13 @@ public class UserController {
     private UserMapper userMapper;
     Map<String, Object> map = new HashMap<>();
 
+    /**
+     * 注册
+     * @param user
+     * @param captcha
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Object register(User user,
                            @RequestParam("captcha") String captcha,
@@ -59,6 +66,11 @@ public class UserController {
         return map;
     }
 
+    /**
+     * 判断邮箱是否存在
+     * @param email
+     * @return
+     */
     @RequestMapping(value = "/emailIsExist", method = RequestMethod.POST)
     public Object emailIsExist(@RequestParam("email") String email) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -74,6 +86,12 @@ public class UserController {
         return map;
     }
 
+    /**
+     * 验证用户名是否存在
+     *
+     * @param username
+     * @return
+     */
     @RequestMapping(value = "/usernameIsExist", method = RequestMethod.POST)
     public Object usernameIsExist(@RequestParam("username") String username) {
         System.out.println(username);
@@ -81,11 +99,11 @@ public class UserController {
         queryWrapper.eq("username", username);
         Integer count = userMapper.selectCount(queryWrapper);
         if (count >= 1) {
-            map.put("code", 0);
+            map.put("code", 1);
             map.put("message", "用户名已存在");
         } else {
-            map.put("code", 1);
-            map.put("message", "用户名 不存在,可以注册");
+            map.put("code", 0);
+            map.put("message", "用户名不存在");
         }
         return map;
     }
@@ -125,7 +143,7 @@ public class UserController {
      * @param username
      * @return
      */
-    @RequestMapping(value = "/getCaptchaImg", method = RequestMethod.GET)
+    @RequestMapping(value = "/getCaptchaImg", method = RequestMethod.POST)
     public Object getCaptchaImg(@RequestParam("username") String username,
                                 HttpServletRequest request) {
 
@@ -162,11 +180,12 @@ public class UserController {
         // 判断验证码
         CaptchaImg captchaImg = (CaptchaImg) session.getAttribute(user.getUsername());
 
-        if (captcha == null || !captchaImg.getCaptchaCode().equals(captcha)) {
+        if (captcha == null) {
             map.put("code", 0);
             map.put("message", "验证码错误");
             return map;
         }
+
         //判断验证码超时
         if (System.currentTimeMillis() - captchaImg.getCreateTime() > 2 * 60 * 1000) {
             map.put("code", 0);

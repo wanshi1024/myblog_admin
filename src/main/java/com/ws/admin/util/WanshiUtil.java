@@ -41,8 +41,9 @@ public class WanshiUtil {
 
     /**
      * 随机产生字符串
+     *
      * @param length 字符串长度
-     * @param type 类型 (0: 仅数字; 1:仅字符; 2:数字和字符)
+     * @param type   类型 (0: 仅数字; 1:仅字符; 2:数字和字符)
      * @return
      */
     public static String createCaptcha(int length, int type) {
@@ -60,7 +61,7 @@ public class WanshiUtil {
             endChar = 'z';
         }
         // 有数字和字母
-        else if (type == 2){
+        else if (type == 2) {
             beginChar = 'a';
             endChar = 'z' + 10;
         }
