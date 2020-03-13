@@ -1,5 +1,6 @@
 package com.ws.admin;
 
+import com.ws.admin.demo.JwtHelper;
 import com.ws.admin.entity.User;
 import com.ws.admin.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,18 @@ class AdminApplicationTests {
     void test1() {
         List<User> userList = userMapper.selectList(null);
         userList.forEach(System.out::println);
+    }
+
+    public static void main(String[] args) {
+        JwtHelper jwtHelper = new JwtHelper();
+        String token = jwtHelper.createToken(6);
+        System.out.println(token);
+
+        Integer integer = jwtHelper.verifyTokenAndGetUserId(token);
+        System.out.println(integer);
+    }
+    void test2(){
+
     }
 
 }

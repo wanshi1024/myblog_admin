@@ -1,12 +1,14 @@
 package com.ws.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.ws.admin.demo.JwtHelper;
 import com.ws.admin.entity.Captcha;
 import com.ws.admin.entity.CaptchaImg;
 import com.ws.admin.entity.User;
 import com.ws.admin.mapper.UserMapper;
 import com.ws.admin.util.CaptchaImgUtil;
 import com.ws.admin.util.WanshiUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +30,7 @@ public class UserController {
 
     /**
      * 注册
+     *
      * @param user
      * @param captcha
      * @param request
@@ -68,6 +71,7 @@ public class UserController {
 
     /**
      * 判断邮箱是否存在
+     *
      * @param email
      * @return
      */
@@ -146,18 +150,15 @@ public class UserController {
     @RequestMapping(value = "/getCaptchaImg", method = RequestMethod.POST)
     public Object getCaptchaImg(@RequestParam("username") String username,
                                 HttpServletRequest request) {
-
-        System.out.println(username);
         HttpSession session = request.getSession();
-        CaptchaImg captchaImg = (CaptchaImg) session.getAttribute(username);
-        if (captchaImg != null) {
-            session.removeAttribute(username);
-        }
-
         Map<String, String> captchaImgBase64 = CaptchaImgUtil.getCaptchaImgBase64(4);
-        session.setAttribute(username, new CaptchaImg(username, captchaImgBase64.get("captchaCode"), System.currentTimeMillis()));
+        CaptchaImg captchaImg = new CaptchaImg(username, captchaImgBase64.get("captchaCode"), System.currentTimeMillis());
+        session.setAttribute(username, captchaImg);
         return captchaImgBase64;
     }
+
+    @Autowired
+    private JwtHelper jwtHelper;
 
     /**
      * 登陆
@@ -177,10 +178,10 @@ public class UserController {
             return map;
         }
         HttpSession session = request.getSession();
-        // 判断验证码
         CaptchaImg captchaImg = (CaptchaImg) session.getAttribute(user.getUsername());
 
-        if (captcha == null) {
+        //判断验证码正确
+        if (captchaImg == null || !captchaImg.getCaptchaCode().equals(captcha)) {
             map.put("code", 0);
             map.put("message", "验证码错误");
             return map;
@@ -192,6 +193,7 @@ public class UserController {
             map.put("message", "验证码超时,请重新获取");
             return map;
         }
+
         session.removeAttribute(user.getUsername());
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -202,6 +204,7 @@ public class UserController {
             map.put("code", 1);
             map.put("message", "用户名密码正确,登陆成功");
             map.put("userInfo", userResult);
+            map.put("token", jwtHelper.createToken(userResult.getId()));
         } else {
             map.put("code", 0);
             map.put("message", "用户名或密码错误,请核对后登陆");
@@ -209,4 +212,32 @@ public class UserController {
 
         return map;
     }
+
+    /**
+     * 验证token
+     *
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "/checkToken", method = RequestMethod.POST)
+    public Object checkToken(@RequestParam("token") String token) {
+
+//        System.out.println(token);
+        Integer integer = jwtHelper.verifyTokenAndGetUserId(token);
+        if (integer == 0) {
+            map.put("code", 0);
+            map.put("message", "token无效,请登录");
+        } else {
+            User user = userMapper.selectById(integer);
+            if (user == null) {
+                map.put("code", 0);
+                map.put("message", "自动登录失败");
+            } else {
+                map.put("code", 1);
+                map.put("userInfo", user);
+            }
+        }
+        return map;
+    }
+
 }

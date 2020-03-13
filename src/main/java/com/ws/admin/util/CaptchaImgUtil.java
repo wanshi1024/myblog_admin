@@ -123,7 +123,7 @@ public class CaptchaImgUtil {
         for (int i = 0; i < length; i++) {
             randomCode = drawString(g, randomCode, i);
         }
-        System.out.println("验证码是：" + randomCode);
+//        System.out.println("验证码是：" + randomCode);
         g.dispose();
 
         result.put("captchaCode", randomCode);
