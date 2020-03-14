@@ -1,4 +1,4 @@
-package com.ws.admin.demo;
+package com.ws.admin.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

@@ -16,24 +16,15 @@ import java.io.Serializable;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "t_user")
-public class User extends Model<User> implements Serializable{
-
-    private static final long serialVersionUID = 9164678719908868415L;
-    @TableId(value = "id",type = IdType.AUTO)
+@TableName(value = "t_article_label")
+public class ArticleLabel extends Model<ArticleLabel> implements Serializable {
+    private static final long serialVersionUID = -8532722617845014963L;
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField(value = "username")
-    private String username;
+    @TableField(value = "label_name")
+    private String labelName;
 
-    @TableField(value = "password")
-    private String password;
-
-    @TableField(value = "email")
-    private String email;
-
-    @TableField(value = "avatar")
-    private String avatar;
-
-
+    @TableField(value = "label_classify")
+    private Integer labelClassify;
 }

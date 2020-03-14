@@ -1,7 +1,7 @@
 package com.ws.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.ws.admin.demo.JwtHelper;
+import com.ws.admin.util.JwtHelper;
 import com.ws.admin.entity.Captcha;
 import com.ws.admin.entity.CaptchaImg;
 import com.ws.admin.entity.User;
@@ -98,7 +98,7 @@ public class UserController {
      */
     @RequestMapping(value = "/usernameIsExist", method = RequestMethod.POST)
     public Object usernameIsExist(@RequestParam("username") String username) {
-        System.out.println(username);
+//        System.out.println(username);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         Integer count = userMapper.selectCount(queryWrapper);
@@ -240,4 +240,24 @@ public class UserController {
         return map;
     }
 
+    /**
+     * 修改头像 把头像的url修改进来
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/uploadAvatar", method = RequestMethod.POST)
+    public Object uploadAvatar(User user) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", user.getId());
+        int update = userMapper.update(user, queryWrapper);
+        if (update > 0) {
+            map.put("code", 1);
+            map.put("message", "头像上传成功");
+            map.put("userInfo",user);
+        } else {
+            map.put("code", 0);
+            map.put("message", "头像上传失败,请稍后重试或咨询站长");
+        }
+        return map;
+    }
 }
