@@ -1,9 +1,12 @@
 package com.ws.admin;
 
-import com.ws.admin.mapper.ArticleLabelMapper;
-import com.ws.admin.util.JwtHelper;
+import com.ws.admin.entity.Article;
 import com.ws.admin.entity.User;
+import com.ws.admin.entity.vo.ArticleVO;
+import com.ws.admin.mapper.ArticleLabelMapper;
+import com.ws.admin.mapper.ArticleMapper;
 import com.ws.admin.mapper.UserMapper;
+import com.ws.admin.util.JwtHelper;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,4 +44,23 @@ class AdminApplicationTests {
         System.out.println(integer);
     }
 
+    @Resource
+    ArticleMapper articleMapper;
+    @Test
+    void test3(){
+        Article article = new Article();
+        article.setUserId(10);
+        article.setArticleTitle("test_title");
+        article.setArticleContent("test_content");
+        article.setArticleLabel("1,2,3");
+        int insert = articleMapper.insert(article);
+        System.out.println(insert);
+    }
+    @Test
+    void test4(){
+        List<ArticleVO> articleVOS = articleMapper.findArticlePage();
+        for (ArticleVO articleVO : articleVOS) {
+            System.out.println(articleVO);
+        }
+    }
 }
