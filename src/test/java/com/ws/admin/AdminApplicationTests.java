@@ -1,8 +1,9 @@
 package com.ws.admin;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ws.admin.entity.Article;
 import com.ws.admin.entity.User;
-import com.ws.admin.entity.vo.ArticleVO;
 import com.ws.admin.mapper.ArticleLabelMapper;
 import com.ws.admin.mapper.ArticleMapper;
 import com.ws.admin.mapper.UserMapper;
@@ -48,19 +49,18 @@ class AdminApplicationTests {
     ArticleMapper articleMapper;
     @Test
     void test3(){
-        Article article = new Article();
-        article.setUserId(10);
-        article.setArticleTitle("test_title");
-        article.setArticleContent("test_content");
-        article.setArticleLabel("1,2,3");
-        int insert = articleMapper.insert(article);
-        System.out.println(insert);
+       articleMapper.increaseReadCount(6);
     }
     @Test
     void test4(){
-        List<ArticleVO> articleVOS = articleMapper.findArticlePage();
-        for (ArticleVO articleVO : articleVOS) {
-            System.out.println(articleVO);
+        QueryWrapper<Article> qw = new QueryWrapper();
+        qw.like("article_title","111");
+        Page<Article> page = articleMapper.findArticlePage(new Page(1,1));
+        List<Article> list = page.getRecords();
+        for (Article a : list) {
+            System.out.println(a);
+
         }
+
     }
 }
