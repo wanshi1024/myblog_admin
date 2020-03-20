@@ -11,18 +11,17 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "t_article_label")
-public class ArticleLabel extends Model<ArticleLabel> implements Serializable {
-    private static final long serialVersionUID = -8532722617845014963L;
-    @TableId(value = "id", type = IdType.AUTO)
+@TableName(value = "t_article_collection")
+public class ArticleCollection extends Model<ArticleCollection> implements Serializable {
+    private static final long serialVersionUID = -8029790133430649398L;
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-
-    @TableField(value = "label_name")
-    private String labelName;
-
-    @TableField(value = "label_classify")
-    private Integer labelClassify;
+    @TableField(value = "userId")
+    private Integer userId;
+    @TableField(value = "articleId")
+    private Integer articleId;
 }

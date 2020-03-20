@@ -15,8 +15,6 @@ spring:
       max-active: 20
       min-idle: 5
       max-wait: 60000
-
-
   #热部署
   devtools:
     restart:
@@ -25,3 +23,6 @@ spring:
       poll-interval: 3000ms
       quiet-period: 2999ms
 
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #输出sql语句配置

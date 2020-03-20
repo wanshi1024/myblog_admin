@@ -8,12 +8,10 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.io.Serializable;
 
 @Data
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "t_user")

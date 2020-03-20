@@ -11,7 +11,6 @@ import java.io.Serializable;
  * 注册用的验证码类
  */
 @Data
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Captcha implements Serializable {

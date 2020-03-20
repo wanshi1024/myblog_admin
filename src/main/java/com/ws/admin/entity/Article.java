@@ -8,12 +8,10 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.io.Serializable;
 
 @Data
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "t_article")
@@ -50,7 +48,12 @@ public class Article extends Model<Article> implements Serializable {
     /*****/
     @TableField(exist = false)
     private String username;
+
     @TableField(exist = false)
     private String avatar;
 
+    /********/
+//
+//    @TableField(exist = false)
+//    private Integer collectionId;
 }
