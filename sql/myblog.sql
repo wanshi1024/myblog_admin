@@ -42,7 +42,7 @@ CREATE TABLE `t_article` (
 
 LOCK TABLES `t_article` WRITE;
 /*!40000 ALTER TABLE `t_article` DISABLE KEYS */;
-INSERT INTO `t_article` VALUES (3,10,'test222','<p>我是内容啊啊O(∩_∩)O哈哈~</p>','1,2',9,0,'2020-03-16 16:37','1'),(4,10,'test583839339','<p>反反复复付方法法国吧<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/40/pcmoren_tian_org.png\" alt=\"[舔屏]\" data-w-e=\"1\"><img src=\"http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif\" alt=\"[草泥马]\" data-w-e=\"1\"></p>','9,15',7,0,'2020-03-16 16:40','1'),(6,10,'4444444444444444444444444444444444','<h1><span style=\"background-color: rgb(249, 150, 59);\">本田</span></h1>','3',10,0,'2020-03-16 16:46','1'),(7,10,'java好雪吗  我在修改一个','<p><img src=\"http://123.56.23.25:1111/images/1584441474052-111.jpg\" style=\"max-width:100%;\"><br></p><p>图片好大 啊&nbsp;<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png\" alt=\"[污]\" data-w-e=\"1\"></p>','2,4,5',18,0,'2020-03-17 22:13','1'),(9,10,'再来一条','<table border=\"0\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><th><span style=\"font-style: italic; text-decoration-line: underline line-through;\">&nbsp;1</span></th><th><span style=\"background-color: rgb(0, 0, 0);\">1&nbsp;</span></th><th><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_org.png\" alt=\"[坏笑]\" data-w-e=\"1\"><br></th><th>1&nbsp;</th><th>1&nbsp;</th></tr><tr><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td></tr><tr><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td></tr><tr><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td></tr><tr><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;</td></tr></tbody></table><p><br></p>','13,21',3,0,'2020-03-17 18:42','0'),(10,10,'哈哈哈哈5555','<blockquote><span style=\"font-weight: bold; background-color: rgb(194, 79, 74); font-family: 宋体; font-size: xx-large;\">哈哈哈哈5555</span></blockquote>','5',2,0,'2020-03-17 22:02','0'),(11,9,'我的账号是shisiping','<p>测试一下啦啦啦</p>','10',54,0,'2020-03-20 16:57','1'),(12,9,'3333','<p>33333</p>','5',0,0,'2020-03-20 16:59','1');
+INSERT INTO `t_article` VALUES (3,10,'test222','<p>我是内容啊啊O(∩_∩)O哈哈~</p>','1,2',9,0,'2020-03-16 16:37','1'),(4,10,'test583839339','<p>反反复复付方法法国吧<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/40/pcmoren_tian_org.png\" alt=\"[舔屏]\" data-w-e=\"1\"><img src=\"http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif\" alt=\"[草泥马]\" data-w-e=\"1\"></p>','9,15',7,0,'2020-03-16 16:40','1'),(6,10,'4444444444444444444444444444444444','<h1><span style=\"background-color: rgb(249, 150, 59);\">本田</span></h1>','3',10,0,'2020-03-16 16:46','1'),(7,10,'java好雪吗  我在修改一个','<p><img src=\"http://123.56.23.25:1111/images/1584441474052-111.jpg\" style=\"max-width:100%;\"><br></p><p>图片好大 啊&nbsp;<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png\" alt=\"[污]\" data-w-e=\"1\"></p>','2,4,5',18,0,'2020-03-17 22:13','1'),(9,10,'再来一条','<table border=\"0\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\"><tbody><tr><th><span style=\"font-style: italic; text-decoration-line: underline line-through;\">&nbsp;1</span></th><th><span style=\"background-color: rgb(0, 0, 0);\">1&nbsp;</span></th><th><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_org.png\" alt=\"[坏笑]\" data-w-e=\"1\"><br></th><th>1&nbsp;</th><th>1&nbsp;</th></tr><tr><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td></tr><tr><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td></tr><tr><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td></tr><tr><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;1</td><td>&nbsp;</td></tr></tbody></table><p><br></p>','13,21',3,0,'2020-03-17 18:42','0'),(10,10,'哈哈哈哈5555','<blockquote><span style=\"font-weight: bold; background-color: rgb(194, 79, 74); font-family: 宋体; font-size: xx-large;\">哈哈哈哈5555</span></blockquote>','5',2,0,'2020-03-17 22:02','0'),(11,9,'我的账号是shisiping','<p>测试一下啦啦啦</p>','10',100,0,'2020-03-20 16:57','1'),(12,9,'3333','<p>33333</p>','5',0,0,'2020-03-20 16:59','1');
 /*!40000 ALTER TABLE `t_article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `t_article_collection` (
 
 LOCK TABLES `t_article_collection` WRITE;
 /*!40000 ALTER TABLE `t_article_collection` DISABLE KEYS */;
-INSERT INTO `t_article_collection` VALUES (4,10,7),(5,10,4),(6,9,7),(7,10,11);
+INSERT INTO `t_article_collection` VALUES (4,10,7),(5,10,4),(6,9,7);
 /*!40000 ALTER TABLE `t_article_collection` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,9 +110,8 @@ CREATE TABLE `t_comment_1` (
   `commentContent` varchar(255) NOT NULL COMMENT '评论内容',
   `commentDate` varchar(255) NOT NULL COMMENT '评论日期',
   `complimentCount` int(10) NOT NULL DEFAULT '0' COMMENT '点赞数',
-  `subLevelCommentCount` int(10) NOT NULL DEFAULT '0' COMMENT '子评论数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +120,7 @@ CREATE TABLE `t_comment_1` (
 
 LOCK TABLES `t_comment_1` WRITE;
 /*!40000 ALTER TABLE `t_comment_1` DISABLE KEYS */;
-INSERT INTO `t_comment_1` VALUES (1,10,11,'滴滴打车 才才 才v vv ','2020-03-20 18:21:58',0,0),(2,10,11,'风非常非常飞飞飞iFile','2020-03-20 18:59:57',0,0);
+INSERT INTO `t_comment_1` VALUES (1,10,11,'滴滴打车 才才 才v vv ','2020-03-20 18:21:58',2),(2,10,11,'风非常非常飞飞飞iFile','2020-03-20 18:59:57',3),(3,9,11,'哈哈哈','2020-03-21 14:42:18',2),(4,9,11,'我在来个','2020-03-21 15:56:14',2);
 /*!40000 ALTER TABLE `t_comment_1` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +140,7 @@ CREATE TABLE `t_comment_2` (
   `commentDate` varchar(255) NOT NULL COMMENT '评论时间',
   `complimentCount` int(10) NOT NULL DEFAULT '0' COMMENT '点赞数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +149,7 @@ CREATE TABLE `t_comment_2` (
 
 LOCK TABLES `t_comment_2` WRITE;
 /*!40000 ALTER TABLE `t_comment_2` DISABLE KEYS */;
+INSERT INTO `t_comment_2` VALUES (1,9,10,1,'滴滴车吗','2020-03-21 14:58:16',1),(2,10,9,4,'恩额嗯 你哈样的','2020-03-21 16:04:01',2),(3,10,9,4,'fff从VBv','2020-03-21 22:45:47',0),(8,10,0,4,'急急急','2020-03-21 23:04:03',0),(9,10,9,1,'不不不','2020-03-21 23:04:43',1);
 /*!40000 ALTER TABLE `t_comment_2` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-20 21:46:21
+-- Dump completed on 2020-03-21 23:06:50

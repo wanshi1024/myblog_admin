@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -36,8 +37,7 @@ public class Comment1 extends Model<Comment1> implements Serializable {
     @TableField(value = "complimentCount")
     private Integer complimentCount; //点赞数
 
-    @TableField(value = "subLevelCommentCount")
-    private Integer subLevelCommentCount; //子评论数
+
 
     /*****/
     @TableField(exist = false)
@@ -49,4 +49,9 @@ public class Comment1 extends Model<Comment1> implements Serializable {
     @TableField(exist = false)
     private Integer flag=0; //辅助前端的一个属性
 
+    @TableField(exist = false)
+    private Integer flag1=0; //辅助前端的一个属性
+
+    @TableField(exist = false)
+    private List<Comment2> comment2List;
 }

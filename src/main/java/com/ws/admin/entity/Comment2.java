@@ -39,4 +39,16 @@ public class Comment2 extends Model<Comment2> implements Serializable {
     @TableField(value = "complimentCount")
     private Integer complimentCount; //点赞数
 
+
+    /********/
+    @TableField(exist = false)
+    private String fromUserName;
+
+    @TableField(exist = false)
+    private String fromAvatar;
+
+    @TableField(exist = false)
+    private String toUserName;
+
+
 }
