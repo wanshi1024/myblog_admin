@@ -53,5 +53,8 @@ public class Comment1 extends Model<Comment1> implements Serializable {
     private Integer flag1=0; //辅助前端的一个属性
 
     @TableField(exist = false)
+    private boolean compliment = false;
+
+    @TableField(exist = false)
     private List<Comment2> comment2List;
 }

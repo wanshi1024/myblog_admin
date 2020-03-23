@@ -25,4 +25,7 @@ public class ArticleLabel extends Model<ArticleLabel> implements Serializable {
 
     @TableField(value = "label_classify")
     private Integer labelClassify;
+
+    @TableField(value = "use_count")
+    private Integer useCount;
 }

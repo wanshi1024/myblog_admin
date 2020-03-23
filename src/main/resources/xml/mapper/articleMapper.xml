@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ws.admin.mapper.ArticleMapper">
+
+    <select id="findRelatedArticle" resultType="article">
+        SELECT a.id,a.article_title FROM t_article a
+        <where>
+            a.id!=#{articleId}
+            <if test="articleLabel!=null">
+                and
+            </if>
+            <foreach collection="articleLabel" item="item" separator="or" >
+                a.article_label  like CONCAT('%',#{item,jdbcType=VARCHAR},'%')
+            </foreach>
+        </where>
+    </select>
+
+</mapper>

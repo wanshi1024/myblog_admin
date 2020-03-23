@@ -2,6 +2,7 @@ package com.ws.admin.controller;
 
 import com.ws.admin.entity.ArticleLabel;
 import com.ws.admin.mapper.ArticleLabelMapper;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,11 +17,12 @@ import java.util.Map;
 public class ArticleLabelController {
     @Resource
     private ArticleLabelMapper articleLabelMapper;
-    Map<String, Object> map = new HashMap<>();
+
 
     //    1-开发语言 2-平台框架 3-服务器 4-数据库 5开发工具 6-其他
     @RequestMapping("/getAllLabel")
     public Object getAllLabel() {
+        Map<String, Object> map = new HashMap<>();
         List<ArticleLabel> labelList = articleLabelMapper.selectList(null);
         List<ArticleLabel> list1 = new ArrayList<>();
         List<ArticleLabel> list2 = new ArrayList<>();
@@ -80,4 +82,15 @@ public class ArticleLabelController {
         return r;
     }
 
+
+    // 获取热门标签
+    @GetMapping("/getHotLabel")
+    public Object getHotLabel(){
+        Map<String, Object> map = new HashMap<>();
+
+        List<ArticleLabel> labelList = articleLabelMapper.findHotLabel();
+        map.put("hotLabelList",labelList);
+
+        return map;
+    }
 }

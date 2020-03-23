@@ -50,5 +50,7 @@ public class Comment2 extends Model<Comment2> implements Serializable {
     @TableField(exist = false)
     private String toUserName;
 
+    @TableField(exist = false)
+    private boolean compliment = false;
 
 }

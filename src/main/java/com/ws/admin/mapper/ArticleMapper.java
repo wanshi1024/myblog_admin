@@ -7,7 +7,10 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
+
 public interface ArticleMapper extends BaseMapper<Article> {
+
     @Select("SELECT  a.id,\n" +
             "\t\t\t\ta.article_title,\n" +
             "\t\t\t\ta.article_content,\n" +
@@ -30,4 +33,8 @@ public interface ArticleMapper extends BaseMapper<Article> {
             "\n" +
             "(SELECT tac.articleId id FROM t_article_collection tac WHERE tac.userId=#{userId}) ")
     Page<Article> findArticlePageByMyCollection(Page page, @Param("userId") Integer userId);
+
+    // 查找相关文章
+    List<Article> findRelatedArticle(@Param("articleLabel") List<String> articleLabel,@Param("articleId") Integer articleId);
+
 }

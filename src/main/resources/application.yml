@@ -23,6 +23,8 @@ spring:
       poll-interval: 3000ms
       quiet-period: 2999ms
 
-#mybatis-plus:
+mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #输出sql语句配置
+  mapper-locations: classpath:xml/mapper/*.xml
+  type-aliases-package: com.ws.admin.entity

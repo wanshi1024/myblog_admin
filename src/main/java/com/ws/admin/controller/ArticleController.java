@@ -14,10 +14,7 @@ import com.ws.admin.mapper.UserMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/article")
@@ -39,6 +36,16 @@ public class ArticleController {
     @PostMapping("/addArticle")
     public Object addArticle(Article article) {
         Map<String, Object> map = new HashMap<>();
+
+        String[] s = article.getArticleLabel().split(",");
+        List<Integer> l = new ArrayList<>();
+        for (String s1 : s) {
+            l.add(Integer.parseInt(s1));
+        }
+        for (Integer labelId : l) {
+            labelMapper.increaseUseCount(labelId); //给文章使用的标签使用次数+1
+        }
+
         int insert = articleMapper.insert(article);
         if (insert == 1) {
             map.put("code", 1);
@@ -275,5 +282,24 @@ public class ArticleController {
         }
 
         return map;
+    }
+
+    /**
+     * 查找相关文章
+     *
+     * @param articleId
+     * @return
+     */
+    @GetMapping("/findRelatedArticle/{articleId}")
+    public Object findRelatedArticle(@PathVariable("articleId") Integer articleId) {
+        Map<String, Object> map = new HashMap<>();
+        QueryWrapper<Article> qw = new QueryWrapper<>();
+        qw.eq("id", articleId);
+        Article article = articleMapper.selectOne(qw);
+        List<String> split = Arrays.asList(article.getArticleLabel().split(","));
+        List<Article> list = articleMapper.findRelatedArticle(split, articleId);
+        map.put("articleList", list);
+        return map;
+
     }
 }
