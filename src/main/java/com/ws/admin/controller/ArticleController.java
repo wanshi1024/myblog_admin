@@ -37,13 +37,11 @@ public class ArticleController {
     public Object addArticle(Article article) {
         Map<String, Object> map = new HashMap<>();
 
-        String[] s = article.getArticleLabel().split(",");
-        List<Integer> l = new ArrayList<>();
-        for (String s1 : s) {
-            l.add(Integer.parseInt(s1));
-        }
-        for (Integer labelId : l) {
-            labelMapper.increaseUseCount(labelId); //给文章使用的标签使用次数+1
+        String[] strings = article.getArticleLabel().split(",");
+
+        for (String s : strings) {
+            //给文章使用的标签使用次数+1
+            labelMapper.increaseUseCount(s);
         }
 
         int insert = articleMapper.insert(article);
@@ -66,8 +64,10 @@ public class ArticleController {
      */
     @GetMapping("/articleList")
     public Object articleList(@RequestParam("current") Integer current,
-                              @RequestParam("size") Integer size) {
-        Page<Article> page = articleMapper.findArticlePage(new Page(current, size));
+                              @RequestParam("size") Integer size,
+                              Article article) {
+
+        Page<Article> page = articleMapper.findArticlePage(new Page(current, size), article);
         Map<String, Object> map = new HashMap<>();
         map.put("total", page.getTotal());
         map.put("articleList", page.getRecords());
@@ -104,21 +104,13 @@ public class ArticleController {
         articleMapper.increaseReadCount(id); // 阅读数量+1
         Article article = articleMapper.selectById(id);
         // 分解标签字符串查询标签名生成数组
-        String[] split = article.getArticleLabel().split(",");
-        List<String> labelNameList = new ArrayList<>();
-        for (String s : split) {
-            int i = Integer.parseInt(s);
-            ArticleLabel articleLabel = labelMapper.selectById(i);
-            labelNameList.add(articleLabel.getLabelName());
-        }
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("username").eq("id", article.getUserId());
         User user = userMapper.selectOne(queryWrapper);
         article.setUsername(user.getUsername());
-        article.setAvatar(user.getAvatar());
+
         Map<String, Object> map = new HashMap<>();
         map.put("article", article);
-        map.put("labelName", labelNameList);
         return map;
     }
 
@@ -179,7 +171,7 @@ public class ArticleController {
                                 @RequestParam("current") Integer current,
                                 @RequestParam("size") Integer size) {
         QueryWrapper<Article> qw = new QueryWrapper<>();
-        qw.eq("user_id", user.getId()).eq("state", 1);
+        qw.eq("user_id", user.getId()).eq("state", 1).orderByDesc("id");
         IPage<Article> page = articleMapper.selectPage(new Page<Article>(current, size), qw);
         Map<String, Object> map = new HashMap<>();
         map.put("total", page.getTotal());
@@ -299,6 +291,24 @@ public class ArticleController {
         List<String> split = Arrays.asList(article.getArticleLabel().split(","));
         List<Article> list = articleMapper.findRelatedArticle(split, articleId);
         map.put("articleList", list);
+        return map;
+
+    }
+
+    /**
+     * 通过标签名查询文章
+     *
+     * @param current
+     * @param size
+     * @param labelName
+     * @return
+     */
+    @GetMapping("/findArticleByLabel")
+    public Object findArticleByLabel(@RequestParam("current") Integer current,
+                                     @RequestParam("size") Integer size,
+                                     @RequestParam("labelName") String labelName) {
+        Map<String, Object> map = new HashMap<>();
+
         return map;
 
     }

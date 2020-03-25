@@ -11,20 +11,13 @@ import java.util.List;
 
 public interface ArticleMapper extends BaseMapper<Article> {
 
-    @Select("SELECT  a.id,\n" +
-            "\t\t\t\ta.article_title,\n" +
-            "\t\t\t\ta.article_content,\n" +
-            "\t\t\t\ta.read_count,\n" +
-            "\t\t\t\ta.comment_count,\n" +
-            "\t\t\t\ta.publish_date,\n" +
-            "\t\t\t\ta.user_id,\n" +
-            "\t\t\t\tu.username,\n" +
-            "\t\t\t\tu.avatar\n" +
-            "\t\n" +
-            "FROM t_article a,t_user u \n" +
-            "\n" +
-            "WHERE a.state=1 AND a.user_id=u.id ORDER BY a.id DESC")
-    Page<Article> findArticlePage(Page page);
+    /**
+     * 查找文章列表
+     * @param page
+     * @param article
+     * @return
+     */
+    Page<Article> findArticlePage(Page<Article> page, @Param("article") Article article);
 
     @Update("update t_article set read_count=read_count+1 where id=#{id}")
     void increaseReadCount(Integer articleId);
@@ -35,6 +28,6 @@ public interface ArticleMapper extends BaseMapper<Article> {
     Page<Article> findArticlePageByMyCollection(Page page, @Param("userId") Integer userId);
 
     // 查找相关文章
-    List<Article> findRelatedArticle(@Param("articleLabel") List<String> articleLabel,@Param("articleId") Integer articleId);
+    List<Article> findRelatedArticle(@Param("articleLabel") List<String> articleLabel, @Param("articleId") Integer articleId);
 
 }

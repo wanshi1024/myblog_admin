@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ws.admin.mapper.ArticleMapper">
 
+
+    <!--查询文章列表-->
+    <select id="findArticlePage" resultType="article">
+        select a.*,u.username,u.avatar
+        from t_article a,t_user u
+        <where>
+            a.state=1 AND a.user_id=u.id
+            <if test="article.articleTitle!=null and article.articleTitle!='' ">
+                and a.article_title like CONCAT('%',#{article.articleTitle,jdbcType=VARCHAR},'%')
+            </if>
+
+            <if test="article.articleLabel!=null and article.articleLabel!='' ">
+                and a.article_label like CONCAT('%',#{article.articleLabel,jdbcType=VARCHAR},'%')
+            </if>
+            ORDER BY a.id DESC
+        </where>
+    </select>
+
+    <!--查询相关文章-->
     <select id="findRelatedArticle" resultType="article">
         SELECT a.id,a.article_title FROM t_article a
         <where>
@@ -9,8 +28,8 @@
             <if test="articleLabel!=null">
                 and
             </if>
-            <foreach collection="articleLabel" item="item" separator="or" >
-                a.article_label  like CONCAT('%',#{item,jdbcType=VARCHAR},'%')
+            <foreach collection="articleLabel" item="item" separator="or">
+                a.article_label like CONCAT('%',#{item,jdbcType=VARCHAR},'%')
             </foreach>
         </where>
     </select>

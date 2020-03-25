@@ -134,4 +134,16 @@ public class CommentController {
 
         return map;
     }
+
+    @GetMapping("/getMyComment")
+    public Object getMyComment(@RequestParam("userId") Integer userId,
+                               @RequestParam("current") Integer current,
+                               @RequestParam("size") Integer size) {
+        Map<Object, Object> map = new HashMap<>();
+
+
+
+        return map;
+    }
+
 }
