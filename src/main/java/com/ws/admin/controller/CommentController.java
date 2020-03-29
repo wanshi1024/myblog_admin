@@ -1,11 +1,14 @@
 package com.ws.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ws.admin.entity.Comment1;
 import com.ws.admin.entity.Comment2;
+import com.ws.admin.entity.CommentExample;
 import com.ws.admin.mapper.Comment1Mapper;
 import com.ws.admin.mapper.Comment2Mapper;
+import com.ws.admin.mapper.CommentExampleMapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,6 +24,8 @@ public class CommentController {
     private Comment1Mapper comment1Mapper;
     @Resource
     private Comment2Mapper comment2Mapper;
+    @Resource
+    private CommentExampleMapper commentExampleMapper;
 
     /**
      * 添加一级评论
@@ -29,12 +34,26 @@ public class CommentController {
      * @return
      */
     @PostMapping("/addComment1")
-    public Object addComment1(Comment1 comment1) {
+    public Object addComment1(Comment1 comment1,
+                              String articleTitle,
+                              String commentUserName,
+                              Integer toUserId) {
         Map<Object, Object> map = new HashMap<>();
         int i = comment1Mapper.insert(comment1);
         if (i >= 1) {
             map.put("code", 1);
             map.put("message", "评论成功");
+            if (toUserId != comment1.getUserId()) {
+                CommentExample ce = new CommentExample();
+                ce.setArticleId(comment1.getArticleId());
+                ce.setArticleTitle(articleTitle);
+                ce.setFromCommentUserName(commentUserName);
+                ce.setToUserId(toUserId);
+                ce.setCommentContent(comment1.getCommentContent());
+                ce.setCommentDate(comment1.getCommentDate());
+                commentExampleMapper.insert(ce);
+            }
+
         } else {
             map.put("code", 0);
             map.put("message", "评论失败");
@@ -78,13 +97,25 @@ public class CommentController {
      * @return
      */
     @PostMapping("/addComment2")
-    public Object addComment2(Comment2 comment2) {
+    public Object addComment2(Comment2 comment2,
+                              String articleTitle,
+                              String commentUserName,
+                              Integer articleId) {
 
         Map<Object, Object> map = new HashMap<>();
         int i = comment2Mapper.insert(comment2);
         if (i >= 1) {
             map.put("code", 1);
             map.put("message", "评论成功");
+            CommentExample ce = new CommentExample();
+            ce.setArticleId(articleId);
+            ce.setArticleTitle(articleTitle);
+            ce.setFromCommentUserName(commentUserName);
+            ce.setToUserId(comment2.getToUserId());
+            ce.setCommentContent(comment2.getCommentContent());
+            ce.setCommentDate(comment2.getCommentDate());
+
+            commentExampleMapper.insert(ce);
         } else {
             map.put("code", 0);
             map.put("message", "评论失败");
@@ -135,15 +166,49 @@ public class CommentController {
         return map;
     }
 
-    @GetMapping("/getMyComment")
+    @GetMapping("/otherReplyMyComment")
     public Object getMyComment(@RequestParam("userId") Integer userId,
                                @RequestParam("current") Integer current,
                                @RequestParam("size") Integer size) {
         Map<Object, Object> map = new HashMap<>();
-
-
-
+        QueryWrapper<CommentExample> qw = new QueryWrapper<>();
+        qw.eq("toUserId", userId);
+        IPage<CommentExample> page = commentExampleMapper.selectPage(new Page<CommentExample>(current, size), qw);
+        map.put("total", page.getTotal());
+        map.put("list", page.getRecords());
         return map;
     }
 
+    /**
+     * 修改评论阅读状态为已读
+     * @param id
+     * @return
+     */
+    @PostMapping("/updateReadState/{id}")
+    public Object updateReadState(@PathVariable("id") Integer id) {
+        Map<Object, Object> map = new HashMap<>();
+        CommentExample commentExample = new CommentExample();
+        commentExample.setId(id);
+        commentExample.setReadState(1);
+        int i = commentExampleMapper.updateById(commentExample);
+        map.put("code", 1);
+        return map;
+    }
+
+    /**
+     * 获取未读评论数量
+     * @param id
+     * @return
+     */
+    @GetMapping("/unreadCount/{id}")
+    public Object unreadCount(@PathVariable("id") Integer id) {
+        Map<Object, Object> map = new HashMap<>();
+
+        QueryWrapper<CommentExample> qw = new QueryWrapper<>();
+        qw.eq("toUserId", id).eq("readState", 0);
+        Integer count = commentExampleMapper.selectCount(qw);
+        map.put("count", count);
+
+        return map;
+    }
 }

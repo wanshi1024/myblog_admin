@@ -93,7 +93,7 @@
             <version>3.8.0</version>
         </dependency>
 
-         <!--忽略自带的日志框架.-->
+        <!--忽略自带的日志框架.-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -104,7 +104,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
 
 
 
