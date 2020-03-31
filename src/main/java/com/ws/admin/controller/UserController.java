@@ -1,18 +1,15 @@
 package com.ws.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.ws.admin.util.JwtHelper;
 import com.ws.admin.entity.Captcha;
 import com.ws.admin.entity.CaptchaImg;
 import com.ws.admin.entity.User;
 import com.ws.admin.mapper.UserMapper;
 import com.ws.admin.util.CaptchaImgUtil;
+import com.ws.admin.util.JwtHelper;
 import com.ws.admin.util.WanshiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -44,6 +42,7 @@ public class UserController {
 
         HttpSession session = request.getSession();
         Captcha c = (Captcha) session.getAttribute(user.getEmail());
+        System.out.println(c);
         if (c == null) {
             map.put("code", 0);
             map.put("message", "验证码无效");
@@ -136,6 +135,7 @@ public class UserController {
         HttpSession session = request.getSession();
         Captcha captcha = new Captcha(captchaStr, email, System.currentTimeMillis());
         session.setAttribute(email, captcha);
+        System.out.println((Captcha)session.getAttribute(email));
         map.put("code", 1);
         map.put("message", "验证码已发送,请查看您的邮箱");
         return map;

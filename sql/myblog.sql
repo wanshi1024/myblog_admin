@@ -33,7 +33,7 @@ CREATE TABLE `t_article` (
   `publish_date` varchar(20) NOT NULL COMMENT '发布日期',
   `state` varchar(1) NOT NULL DEFAULT '1' COMMENT '1-未删除 0-已删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `t_article` (
 
 LOCK TABLES `t_article` WRITE;
 /*!40000 ALTER TABLE `t_article` DISABLE KEYS */;
-INSERT INTO `t_article` VALUES (20,10,'测试1','<p>测试1</p>',' javascript, php, java',5,0,'2020-03-25 19:35','1'),(21,10,'测试2','<p>测试2</p>',' java, node.js, python',5,0,'2020-03-25 20:27','1'),(22,10,'测试3','<p>测试3</p>',' html, css, html5',18,0,'2020-03-25 20:28','1'),(23,7,'测试4','<p>测试4</p>',' java',3,0,'2020-03-29 17:04','1');
+INSERT INTO `t_article` VALUES (24,11,'测试1','<p>测试1</p>',' javascript',1,0,'2020-03-31 17:40','1');
 /*!40000 ALTER TABLE `t_article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,6 @@ CREATE TABLE `t_article_collection` (
 
 LOCK TABLES `t_article_collection` WRITE;
 /*!40000 ALTER TABLE `t_article_collection` DISABLE KEYS */;
-INSERT INTO `t_article_collection` VALUES (4,10,7),(5,10,4),(6,9,7),(8,10,15);
 /*!40000 ALTER TABLE `t_article_collection` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +92,7 @@ CREATE TABLE `t_article_label` (
 
 LOCK TABLES `t_article_label` WRITE;
 /*!40000 ALTER TABLE `t_article_label` DISABLE KEYS */;
-INSERT INTO `t_article_label` VALUES (1,' javascript',1,3),(2,' php',1,4),(3,' css',1,2),(4,' html',1,1),(5,' html5',1,1),(6,' java',1,7),(7,' node.js',1,2),(8,' python',1,2),(9,' c++',1,0),(10,' c',1,0),(11,' golang',1,0),(12,' objective-c',1,0),(13,' typescript',1,0),(14,' shell',1,0),(15,' swift',1,0),(16,' c#',1,0),(17,' sass',1,0),(18,' ruby',1,0),(19,' bash',1,0),(20,' less',1,0),(21,' asp.net',1,0),(22,' lua',1,0),(23,' scala',1,0),(24,' coffeescript',1,0),(25,' actionscript',1,0),(26,' rust',1,0),(27,' erlang',1,0),(28,' perl',1,0),(29,' laravel',2,0),(30,' spring',2,0),(31,' express',2,0),(32,' django',2,0),(33,' flask',2,0),(34,' yii',2,0),(35,' ruby-on-rails',2,0),(36,' tornado',2,0),(37,' koa',2,0),(38,' struts',2,0),(39,' linux',3,0),(40,' nginx',3,0),(41,' docker',3,0),(42,' apache',3,0),(43,' ubuntu',3,0),(44,' centos',3,0),(45,' 缓存 tomcat',3,0),(46,' 负载均衡',3,0),(47,' unix',3,0),(48,' hadoop',3,0),(49,' windows-server',3,0),(50,' mysql',4,0),(51,' redis',4,0),(52,' mongodb',4,0),(53,' sql',4,0),(54,' oracle',4,0),(55,' nosql memcached',4,0),(56,' sqlserver',4,0),(57,' postgresql',4,0),(58,' sqlite',4,0),(59,' git',5,0),(60,' github',5,0),(61,' visual-studio-code',5,0),(62,' vim',5,0),(63,' sublime-text',5,0),(64,' xcode intellij-idea',5,0),(65,' eclipse',5,0),(66,' maven',5,0),(67,' ide',5,0),(68,' svn',5,0),(69,' visual-studio',5,0),(70,' atom emacs',5,0),(71,' textmate',5,0),(72,' hg',5,0),(73,' 广告',6,0),(74,' 求职',6,0),(75,' 招聘',6,0);
+INSERT INTO `t_article_label` VALUES (1,' javascript',1,4),(2,' php',1,4),(3,' css',1,2),(4,' html',1,1),(5,' html5',1,1),(6,' java',1,7),(7,' node.js',1,2),(8,' python',1,2),(9,' c++',1,0),(10,' c',1,0),(11,' golang',1,0),(12,' objective-c',1,0),(13,' typescript',1,0),(14,' shell',1,0),(15,' swift',1,0),(16,' c#',1,0),(17,' sass',1,0),(18,' ruby',1,0),(19,' bash',1,0),(20,' less',1,0),(21,' asp.net',1,0),(22,' lua',1,0),(23,' scala',1,0),(24,' coffeescript',1,0),(25,' actionscript',1,0),(26,' rust',1,0),(27,' erlang',1,0),(28,' perl',1,0),(29,' laravel',2,0),(30,' spring',2,0),(31,' express',2,0),(32,' django',2,0),(33,' flask',2,0),(34,' yii',2,0),(35,' ruby-on-rails',2,0),(36,' tornado',2,0),(37,' koa',2,0),(38,' struts',2,0),(39,' linux',3,0),(40,' nginx',3,0),(41,' docker',3,0),(42,' apache',3,0),(43,' ubuntu',3,0),(44,' centos',3,0),(45,' 缓存 tomcat',3,0),(46,' 负载均衡',3,0),(47,' unix',3,0),(48,' hadoop',3,0),(49,' windows-server',3,0),(50,' mysql',4,0),(51,' redis',4,0),(52,' mongodb',4,0),(53,' sql',4,0),(54,' oracle',4,0),(55,' nosql memcached',4,0),(56,' sqlserver',4,0),(57,' postgresql',4,0),(58,' sqlite',4,0),(59,' git',5,0),(60,' github',5,0),(61,' visual-studio-code',5,0),(62,' vim',5,0),(63,' sublime-text',5,0),(64,' xcode intellij-idea',5,0),(65,' eclipse',5,0),(66,' maven',5,0),(67,' ide',5,0),(68,' svn',5,0),(69,' visual-studio',5,0),(70,' atom emacs',5,0),(71,' textmate',5,0),(72,' hg',5,0),(73,' 广告',6,0),(74,' 求职',6,0),(75,' 招聘',6,0);
 /*!40000 ALTER TABLE `t_article_label` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +111,7 @@ CREATE TABLE `t_comment_1` (
   `commentDate` varchar(255) NOT NULL COMMENT '评论日期',
   `complimentCount` int(10) NOT NULL DEFAULT '0' COMMENT '点赞数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +120,7 @@ CREATE TABLE `t_comment_1` (
 
 LOCK TABLES `t_comment_1` WRITE;
 /*!40000 ALTER TABLE `t_comment_1` DISABLE KEYS */;
-INSERT INTO `t_comment_1` VALUES (7,10,22,'哈哈哈','2020-03-29 15:46:24',0),(8,10,23,'hhhh','2020-03-29 17:04:54',0);
+INSERT INTO `t_comment_1` VALUES (9,11,24,'哈哈哈哈','2020-03-31 17:40:46',0);
 /*!40000 ALTER TABLE `t_comment_1` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +149,6 @@ CREATE TABLE `t_comment_2` (
 
 LOCK TABLES `t_comment_2` WRITE;
 /*!40000 ALTER TABLE `t_comment_2` DISABLE KEYS */;
-INSERT INTO `t_comment_2` VALUES (2,7,10,7,'你哈什么','2020-03-29 15:46:57',0);
 /*!40000 ALTER TABLE `t_comment_2` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +178,6 @@ CREATE TABLE `t_comment_example` (
 
 LOCK TABLES `t_comment_example` WRITE;
 /*!40000 ALTER TABLE `t_comment_example` DISABLE KEYS */;
-INSERT INTO `t_comment_example` VALUES (5,'test',10,22,'测试3','你哈什么','2020-03-29 15:46:57',1),(6,'顽石mua',7,23,'测试4','hhhh','2020-03-29 17:04:54',1);
 /*!40000 ALTER TABLE `t_comment_example` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +195,7 @@ CREATE TABLE `t_user` (
   `email` varchar(30) NOT NULL,
   `avatar` varchar(500) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +204,7 @@ CREATE TABLE `t_user` (
 
 LOCK TABLES `t_user` WRITE;
 /*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
-INSERT INTO `t_user` VALUES (7,'test','123456','test1@qq.com','http://123.56.23.25:1111/images/1585123954313-Tulips.jpg'),(9,'shisiping','123456','2672575663@qq.com','http://123.56.23.25:1111/images/1584447711225-Koala.jpg'),(10,'顽石mua','ssp1999','2942504702@qq.com','http://123.56.23.25:1111/images/1584257348960-198cc91bf8ad8b26.jpg');
+INSERT INTO `t_user` VALUES (11,'wanshi','123456','2672575663@qq.com','http://123.56.23.25:1111/images/1585647643173-111.jpg');
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -220,4 +217,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-29 17:10:57
+-- Dump completed on 2020-03-31 17:44:26
